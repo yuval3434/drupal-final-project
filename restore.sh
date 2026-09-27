@@ -8,6 +8,11 @@ cat drupal_db_backup.sql | docker exec -i drupal-db psql -U root -d drupal
 echo "Restoring the Drupal sites folder from tar.gz..."
 cat sites_backup.tar.gz | docker exec -i drupal-app tar -xzf - -C /var/www/html
 
+echo "Restarting Drupal..."
+docker restart drupal-app
+
 echo "Restore completed successfully!"
+
+
 
 
