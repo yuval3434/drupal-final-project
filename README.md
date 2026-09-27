@@ -57,7 +57,87 @@
 
 ## מדריך שחזור צעד אחרי צעד
 
-<!-- TODO (לי ים): מדריך מלא למשתמש פשוט, מ-git clone ועד cleanup.sh -->
+### דרישות מוקדמות
+
+- מכונת Linux (או Windows עם WSL2 ו-Ubuntu) עם Docker ו-Git מותקנים.
+- **חובה לוודא ש-Docker רץ לפני שמתחילים.** ב-Windows פותחים את Docker Desktop ומחכים ל-"Engine running". לבדיקה מריצים `docker ps`, והפקודה צריכה להחזיר טבלה, גם אם היא ריקה.
+
+### שלב 1: הורדת הפרויקט
+
+<div dir="ltr">
+
+```bash
+git clone https://github.com/yuval3434/drupal-final-project.git
+cd drupal-final-project
+```
+
+</div>
+
+### שלב 2: הקמת סביבת Docker
+
+<div dir="ltr">
+
+```bash
+./setup.sh
+```
+
+</div>
+
+הסקריפט יוצר את הרשת `drupal-net`, מוריד את ה-images של PostgreSQL ושל Drupal (בהרצה הראשונה זה לוקח כמה דקות), ומריץ את הקונטיינרים `drupal-db` ו-`drupal-app`.
+
+### שלב 3: שחזור האתר מהגיבוי
+
+<div dir="ltr">
+
+```bash
+./restore.sh
+```
+
+</div>
+
+הסקריפט משחזר את בסיס הנתונים מהקובץ `drupal_db_backup.sql`, את תיקיית `sites` מהקובץ `sites_backup.tar.gz`, ומפעיל מחדש את Drupal.
+
+### שלב 4: פתיחת האתר
+
+1. גולשים לכתובת http://localhost:8080.
+2. צריך להופיע "האתר של יובל ולי ים" עם מושגי הקורס.
+3. מתחברים דרך "כניסה" עם שם המשתמש `demoadmin` והסיסמה `secretpass`.
+4. אם שם המשתמש מופיע בראש הדף, ההתחברות הצליחה.
+
+### שלב 5 (אופציונלי): יצירת גיבוי חדש
+
+אחרי שינויים באתר, אפשר לגבות אותו מחדש:
+
+<div dir="ltr">
+
+```bash
+./backup.sh
+```
+
+</div>
+
+### שלב 6: ניקוי סביבת העבודה
+
+<div dir="ltr">
+
+```bash
+./cleanup.sh
+```
+
+</div>
+
+עונים `y` לאישור. הסקריפט מוחק את הקונטיינרים, ה-images, ה-volumes והרשת, ומציג בסוף רשימות ריקות לאימות. קבצי הגיבוי שבתיקיית הפרויקט לא נמחקים.
+
+לסיום, אפשר למחוק גם את תיקיית הפרויקט:
+
+<div dir="ltr">
+
+```bash
+cd ..
+rm -rf drupal-final-project
+```
+
+</div>
 
 ## מידע נוסף
 
@@ -77,11 +157,3 @@ docker exec -w /opt/drupal/web drupal-app ../vendor/bin/dr recipe core/recipes/a
 - **אבטחה:** הקובץ `settings.php` שבגיבוי מכיל את סיסמת בסיס הנתונים. כאן זה מקובל, כי הסיסמה נקבעה בדרישות המטלה. בפרויקט אמיתי לא מעלים קובץ כזה למאגר ציבורי.
 
 </div>
-## מדריך שחזור צעד אחר צעד (Restore Guide)
-
-**שימו לב (TODO):** לפני שמתחילים, חובה לוודא ש-**Docker Desktop** פתוח ופועל.
-
-1. **שכפול המאגר:**
-   ```bash
-   git clone [https://github.com/yuval3434/drupal-final-project.git](https://github.com/yuval3434/drupal-final-project.git)
-   cd drupal-final-project
