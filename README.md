@@ -61,10 +61,18 @@
 
 ## מידע נוסף
 
-- **Docker חייב לרוץ** לפני הרצת הסקריפטים. ב-Windows עם WSL2, פותחים את Docker Desktop ומחכים ל-"Engine running".
-- **localhost:** האתר זמין רק מהמחשב שמריץ את הקונטיינרים. גלישה ל-`localhost:8080` ממחשב אחר תציג את ה-Drupal של אותו מחשב, לא את האתר שלנו.
-- **סוג התוכן "כתבה":** אצלנו, התקנה עם פרופיל Standard ב-Drupal 11.4 לא יצרה את סוג התוכן "כתבה". הוספנו אותו עם הכלי המובנה של Drupal (recipes):
-  `docker exec -w /opt/drupal/web drupal-app ../vendor/bin/dr recipe core/recipes/article_tags`
+- **הפעלת Docker:** לפני הרצת הסקריפטים חייבים לוודא ש-Docker רץ. ב-Windows עם WSL2, פותחים את Docker Desktop ומחכים ל-"Engine running".
+- **גישה לאתר:** האתר זמין רק מהמחשב שמריץ את הקונטיינרים. גלישה לכתובת `localhost:8080` ממחשב אחר תציג את ה-Drupal של אותו מחשב, לא את האתר שלנו.
+- **סוג התוכן "כתבה":** אצלנו, התקנה עם פרופיל Standard ב-Drupal 11.4 לא יצרה את סוג התוכן "כתבה". הוספנו אותו עם הכלי המובנה של Drupal (recipes), בפקודה:
+
+<div dir="ltr">
+
+```bash
+docker exec -w /opt/drupal/web drupal-app ../vendor/bin/dr recipe core/recipes/article_tags
+```
+
+</div>
+
   התיקון שמור בבסיס הנתונים, ולכן לא צריך לחזור עליו אחרי שחזור.
 - **אבטחה:** הקובץ `settings.php` שבגיבוי מכיל את סיסמת בסיס הנתונים. כאן זה מקובל, כי הסיסמה נקבעה בדרישות המטלה. בפרויקט אמיתי לא מעלים קובץ כזה למאגר ציבורי.
 
