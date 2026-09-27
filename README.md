@@ -77,3 +77,11 @@ docker exec -w /opt/drupal/web drupal-app ../vendor/bin/dr recipe core/recipes/a
 - **אבטחה:** הקובץ `settings.php` שבגיבוי מכיל את סיסמת בסיס הנתונים. כאן זה מקובל, כי הסיסמה נקבעה בדרישות המטלה. בפרויקט אמיתי לא מעלים קובץ כזה למאגר ציבורי.
 
 </div>
+## מדריך שחזור צעד אחר צעד (Restore Guide)
+
+**שימו לב (TODO):** לפני שמתחילים, חובה לוודא ש-**Docker Desktop** פתוח ופועל.
+
+1. **שכפול המאגר:**
+   ```bash
+   git clone [https://github.com/yuval3434/drupal-final-project.git](https://github.com/yuval3434/drupal-final-project.git)
+   cd drupal-final-project
